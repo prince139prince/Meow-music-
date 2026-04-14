@@ -890,48 +890,39 @@ const MeowApp = (() => {
         const input = $(btn.dataset.target);
         if (input) input.type = input.type === 'password' ? 'text' : 'password';
       });
-    });
+    })// ── AUTO SET JAMENDO API ─────────────────────
 
-    // Save YouTube API
-    $('saveYtApiBtn').addEventListener('click', async () => {
-      const key     = $('ytApiKey').value.trim();
-      const enabled = $('ytApiEnabled').checked;
-      const status  = $('ytApiStatus');
-      if (!key) { _showApiStatus(status, 'API key cannot be empty', false); return; }
-      $('saveYtApiBtn').textContent = 'Validating...';
-      try {
-        await MeowAPI.YouTube.validate(key);
-        MeowAPI.YouTube.save(key, enabled);
-        _showApiStatus(status, 'YouTube API connected successfully', true);
-        showToast('YouTube API activated', 'success');
-        if (enabled) _loadHomeContent();
-      } catch(e) {
-        _showApiStatus(status, e.message || 'Invalid API key', false);
-      } finally {
-        $('saveYtApiBtn').textContent = 'Save & Activate';
-      }
-    });
+(function setupJamendoAuto() {
+  const CLIENT_ID = '6096faf2';
 
-    // Save Spotify API
-    $('saveSpotApiBtn').addEventListener('click', async () => {
-      const cid     = $('spotClientId').value.trim();
-      const secret  = $('spotClientSecret').value.trim();
-      const enabled = $('spotApiEnabled').checked;
-      const status  = $('spotApiStatus');
-      if (!cid || !secret) { _showApiStatus(status, 'Both Client ID and Secret are required', false); return; }
-      $('saveSpotApiBtn').textContent = 'Validating...';
-      try {
-        MeowAPI.Spotify.save(cid, secret, enabled);
-        await MeowAPI.Spotify.validate();
-        _showApiStatus(status, 'Spotify API connected successfully', true);
-        showToast('Spotify API activated', 'success');
-        if (enabled) _loadHomeContent();
-      } catch(e) {
-        _showApiStatus(status, e.message || 'Invalid credentials', false);
-      } finally {
-        $('saveSpotApiBtn').textContent = 'Save & Activate';
-      }
-    });
+  try {
+    localStorage.setItem('meow_jamendo_client_id', CLIENT_ID);
+    localStorage.setItem('meow_jamendo_enabled', 'true');
+  } catch {}
+
+  console.log('Jamendo API auto-connected');
+})();
+
+
+// ── OPTIONAL: STATUS UI (agar dikhana hai) ───
+
+$('saveJamendoApiBtn')?.addEventListener('click', async () => {
+  const status = $('jamendoApiStatus');
+
+  try {
+    await MeowAPI.Jamendo.validate('6096faf2');
+
+    _showApiStatus(status, 'Jamendo API connected successfully', true);
+    showToast('Jamendo API activated', 'success');
+
+    _loadHomeContent();
+
+  } catch (e) {
+    _showApiStatus(status, e.message || 'Connection failed', false);
+  }
+});
+
+
 
     // Save profile
     $('saveProfileBtn').addEventListener('click', () => {
