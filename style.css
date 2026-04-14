@@ -1022,19 +1022,61 @@ img { display: block; }
   to { opacity: 0; transform: translateY(-10px) scale(0.9); }
 }
 
-/* ============ API NO KEY STATE ============ */
+/* ============ API NO KEY STATE (UPGRADED) ============ */
 .no-api-card {
-  background: var(--bg-card);
+  background: linear-gradient(145deg, var(--bg-card), rgba(255,255,255,0.02));
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: 28px;
+  padding: 32px 20px;
   text-align: center;
   margin: 16px 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
 }
-.no-api-card .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.6; }
-.no-api-card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-.no-api-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6; }
-.no-api-card .btn-primary { width: auto; padding: 10px 24px; display: inline-block; }
+
+/* Hover effect (premium feel) */
+.no-api-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.no-api-card .icon {
+  font-size: 42px;
+  margin-bottom: 14px;
+  opacity: 0.7;
+}
+
+.no-api-card h3 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.no-api-card p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+
+/* Button improvement */
+.no-api-card .btn-primary {
+  width: auto;
+  padding: 10px 26px;
+  display: inline-block;
+  border-radius: 999px;
+  font-size: 13px;
+  transition: all 0.25s ease;
+}
+
+/* Button hover */
+.no-api-card .btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
 
 /* ============ CONTEXT MENU ============ */
 .context-menu {
