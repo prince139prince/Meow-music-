@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>MEOW MUSIC</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- SIDEBAR OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-profile">
+      <div class="sidebar-avatar" id="sidebarAvatar">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="sidebar-name" id="sidebarName">Guest User</div>
+        <div class="sidebar-email" id="sidebarEmail">Add API key to begin</div>
+      </div>
+    </div>
+    <ul class="sidebar-nav">
+      <li class="sidebar-item active" data-screen="home">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" stroke="currentColor" stroke-width="1.5"/><path d="M9 21V12h6v9" stroke="currentColor" stroke-width="1.5"/></svg>
+        Home
+      </li>
+      <li class="sidebar-item" data-screen="search">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Search
+      </li>
+      <li class="sidebar-item" data-screen="library">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+        Library
+      </li>
+      <li class="sidebar-item" data-screen="liked">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.5"/></svg>
+        Liked Songs
+      </li>
+      <li class="sidebar-divider"></li>
+      <li class="sidebar-item" data-screen="settings">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5"/></svg>
+        Settings
+      </li>
+      <li class="sidebar-item" id="logoutBtn">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Logout
+      </li>
+    </ul>
+    <div class="sidebar-version">MEOW MUSIC v1.0</div>
+  </nav>
+
+  <!-- MAIN APP WRAPPER -->
+  <div class="app-wrapper" id="appWrapper">
+
+    <!-- ===== SCREEN: HOME ===== -->
+    <section class="screen active" id="screen-home">
+      <header class="app-header">
+        <button class="icon-btn" id="menuToggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="18" x2="15" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="app-logo">
+          <span class="logo-icon">
+            <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
+              <circle cx="16" cy="16" r="15" fill="url(#lg1)"/>
+              <path d="M10 20c0-4 2.7-7 6-7s6 3 6 7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="12" cy="11" r="1.5" fill="white"/>
+              <circle cx="20" cy="11" r="1.5" fill="white"/>
+              <path d="M9 9c0-1.5 1-3 3-3.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M23 9c0-1.5-1-3-3-3.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              <defs><linearGradient id="lg1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+            </svg>
+          </span>
+          MEOW MUSIC
+        </div>
+        <button class="icon-btn profile-btn" id="profileBtn" aria-label="Profile">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+
+      <div class="screen-scroll">
+        <!-- SEARCH BAR -->
+        <div class="search-container">
+          <div class="search-bar">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" id="searchInput" placeholder="Search songs, artists, albums..." autocomplete="off" />
+            <button class="mic-btn" id="micBtn" aria-label="Voice search">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M5 10a7 7 0 0014 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="21" x2="12" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ALBUMS SECTION -->
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">Albums</h2>
+            <button class="see-all-btn" data-type="albums">See all</button>
+          </div>
+          <div class="albums-scroll" id="albumsScroll">
+            <div class="loading-skeleton-row">
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENTLY PLAYED SECTION -->
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">Recently Played</h2>
+            <button class="see-all-btn" data-type="recent">See all</button>
+          </div>
+          <div class="track-list" id="recentlyPlayed">
+            <div class="empty-state small" id="recentEmpty">
+              <svg viewBox="0 0 24 24" fill="none" width="32" height="32"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg>
+              <p>No recently played songs yet</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECOMMENDED SECTION -->
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">Recommended</h2>
+          </div>
+          <div class="recommended-list" id="recommendedList">
+            <div class="loading-skeleton-featured">
+              <div class="skeleton-featured"></div>
+              <div class="skeleton-featured"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 140px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN: SEARCH ===== -->
+    <section class="screen" id="screen-search">
+      <header class="app-header">
+        <button class="icon-btn back-btn" data-back="home">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l7-7M5 12l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="app-logo">Search</div>
+        <div style="width:40px"></div>
+      </header>
+      <div class="screen-scroll">
+        <div class="search-container">
+          <div class="search-bar">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" id="searchInputFull" placeholder="Songs, artists, albums..." autocomplete="off" />
+          </div>
+        </div>
+        <div class="track-list" id="searchResults">
+          <div class="empty-state" id="searchEmpty">
+            <svg viewBox="0 0 24 24" fill="none" width="48" height="48"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+            <p>Search for songs, artists or albums</p>
+          </div>
+        </div>
+        <div style="height: 140px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN: LIBRARY ===== -->
+    <section class="screen" id="screen-library">
+      <header class="app-header">
+        <button class="icon-btn" id="menuToggle2" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="18" x2="15" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="app-logo">Your Library</div>
+        <div style="width:40px"></div>
+      </header>
+      <div class="screen-scroll">
+        <div class="section">
+          <h2 class="section-title">Saved Songs</h2>
+          <div class="track-list" id="libraryList">
+            <div class="empty-state" id="libraryEmpty">
+              <svg viewBox="0 0 24 24" fill="none" width="48" height="48"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1"/></svg>
+              <p>Your library is empty. Like songs to save them here.</p>
+            </div>
+          </div>
+        </div>
+        <div style="height: 140px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN: LIKED ===== -->
+    <section class="screen" id="screen-liked">
+      <header class="app-header">
+        <button class="icon-btn" id="menuToggle3" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="18" x2="15" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="app-logo">Liked Songs</div>
+        <div style="width:40px"></div>
+      </header>
+      <div class="liked-banner">
+        <div class="liked-banner-inner">
+          <svg viewBox="0 0 24 24" fill="none" width="56" height="56"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" fill="url(#likedGrad)" stroke="none"/><defs><linearGradient id="likedGrad" x1="3" y1="3" x2="21" y2="21"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs></svg>
+          <h2>Liked Songs</h2>
+          <p id="likedCount">0 songs</p>
+        </div>
+      </div>
+      <div class="screen-scroll" style="padding-top: 0;">
+        <div class="track-list" id="likedList">
+          <div class="empty-state" id="likedEmpty">
+            <p>No liked songs yet. Tap the heart on any song.</p>
+          </div>
+        </div>
+        <div style="height: 140px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN: SETTINGS ===== -->
+    <section class="screen" id="screen-settings">
+      <header class="app-header">
+        <button class="icon-btn" id="menuToggle4" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="18" x2="15" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="app-logo">Settings</div>
+        <div style="width:40px"></div>
+      </header>
+      <div class="screen-scroll">
+
+        <!-- PROFILE SECTION -->
+        <div class="settings-section">
+          <h3 class="settings-label">Profile</h3>
+          <div class="settings-card">
+            <div class="settings-row">
+              <label>Display Name</label>
+              <input type="text" class="settings-input" id="displayName" placeholder="Your name" />
+            </div>
+            <div class="settings-divider"></div>
+            <div class="settings-row">
+              <label>Email</label>
+              <input type="email" class="settings-input" id="userEmail" placeholder="your@email.com" />
+            </div>
+            <button class="btn-primary" id="saveProfileBtn">Save Profile</button>
+          </div>
+        </div>
+
+        <!-- API MANAGEMENT -->
+        <div class="settings-section">
+          <h3 class="settings-label">API Management</h3>
+          <div class="settings-card">
+            <div class="api-source-toggle">
+              <button class="api-tab active" data-api="youtube">YouTube API</button>
+              <button class="api-tab" data-api="spotify">Spotify API</button>
+            </div>
+
+            <!-- YouTube API -->
+            <div class="api-panel active" id="panel-youtube">
+              <div class="settings-row col">
+                <label>YouTube Data API v3 Key</label>
+                <div class="api-input-row">
+                  <input type="password" class="settings-input" id="ytApiKey" placeholder="AIza..." autocomplete="off" />
+                  <button class="toggle-visibility" data-target="ytApiKey">
+                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                  </button>
+                </div>
+                <span class="api-hint">Get from <a href="https://console.developers.google.com" target="_blank" rel="noopener">Google Cloud Console</a></span>
+              </div>
+              <div class="settings-row toggle-row">
+                <label>Enable YouTube API</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="ytApiEnabled" />
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+              <button class="btn-primary" id="saveYtApiBtn">Save &amp; Activate</button>
+              <div class="api-status" id="ytApiStatus"></div>
+            </div>
+
+            <!-- Spotify API -->
+            <div class="api-panel" id="panel-spotify">
+              <div class="settings-row col">
+                <label>Spotify Client ID</label>
+                <input type="text" class="settings-input" id="spotClientId" placeholder="Client ID" autocomplete="off" />
+              </div>
+              <div class="settings-row col">
+                <label>Spotify Client Secret</label>
+                <div class="api-input-row">
+                  <input type="password" class="settings-input" id="spotClientSecret" placeholder="Client Secret" autocomplete="off" />
+                  <button class="toggle-visibility" data-target="spotClientSecret">
+                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                  </button>
+                </div>
+                <span class="api-hint">Get from <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a></span>
+              </div>
+              <div class="settings-row toggle-row">
+                <label>Enable Spotify API</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="spotApiEnabled" />
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+              <button class="btn-primary" id="saveSpotApiBtn">Save &amp; Activate</button>
+              <div class="api-status" id="spotApiStatus"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PREFERENCES -->
+        <div class="settings-section">
+          <h3 class="settings-label">Preferences</h3>
+          <div class="settings-card">
+            <div class="settings-row toggle-row">
+              <label>Dark Mode</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="darkModeToggle" checked />
+                <span class="toggle-track"></span>
+              </label>
+            </div>
+            <div class="settings-divider"></div>
+            <div class="settings-row toggle-row">
+              <label>Song Notifications</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="notifToggle" />
+                <span class="toggle-track"></span>
+              </label>
+            </div>
+            <div class="settings-divider"></div>
+            <div class="settings-row toggle-row">
+              <label>Auto Play</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="autoPlayToggle" checked />
+                <span class="toggle-track"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- DANGER ZONE -->
+        <div class="settings-section">
+          <h3 class="settings-label danger-label">Data</h3>
+          <div class="settings-card">
+            <button class="btn-danger" id="clearDataBtn">Clear All Data</button>
+          </div>
+        </div>
+
+        <div style="height: 140px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN: ARTIST / PLAYLIST ===== -->
+    <section class="screen" id="screen-artist">
+      <div class="artist-banner" id="artistBanner">
+        <button class="icon-btn back-btn float-back" id="artistBack">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l7-7M5 12l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="artist-banner-info">
+          <p class="artist-banner-type" id="artistBannerType">ARTIST</p>
+          <h1 class="artist-banner-name" id="artistBannerName">Artist Name</h1>
+        </div>
+      </div>
+      <div class="screen-scroll" style="padding-top: 0;">
+        <div class="artist-controls">
+          <button class="btn-play-all" id="playAllBtn">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg>
+            Play All
+          </button>
+          <button class="btn-shuffle-all" id="shuffleAllBtn">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M16 3h5v5M4 20L21 3M16 21h5v-5M4 4l17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Shuffle
+          </button>
+        </div>
+        <div class="track-list" id="artistTrackList"></div>
+        <div style="height: 140px;"></div>
+      </div>
+    </section>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="nav-item active" data-screen="home">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-screen="search">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Search</span>
+      </button>
+      <button class="nav-item" data-screen="library">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Library</span>
+      </button>
+      <button class="nav-item" data-screen="liked">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Liked</span>
+      </button>
+    </nav>
+
+    <!-- MINI PLAYER -->
+    <div class="mini-player hidden" id="miniPlayer">
+      <div class="mini-thumb" id="miniThumb">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" opacity="0.5"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" opacity="0.5"/></svg>
+      </div>
+      <div class="mini-info" id="miniPlayerInfo">
+        <p class="mini-title" id="miniTitle">No song playing</p>
+        <p class="mini-artist" id="miniArtist">--</p>
+      </div>
+      <div class="mini-controls">
+        <button class="icon-btn mini-like-btn" id="miniLikeBtn" aria-label="Like">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+        <button class="icon-btn mini-play-btn" id="miniPlayBtn" aria-label="Play/Pause">
+          <svg viewBox="0 0 24 24" fill="none" id="miniPlayIcon"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg>
+        </button>
+      </div>
+      <div class="mini-progress-bar">
+        <div class="mini-progress-fill" id="miniProgressFill"></div>
+      </div>
+    </div>
+
+  </div><!-- end app-wrapper -->
+
+  <!-- FULL SCREEN PLAYER -->
+  <div class="player-overlay hidden" id="playerOverlay">
+    <div class="player-bg" id="playerBg"></div>
+    <div class="player-container">
+      <div class="player-header">
+        <button class="icon-btn player-down-btn" id="playerClose">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="player-source-label" id="playerSourceLabel">NOW PLAYING</div>
+        <button class="icon-btn" id="playerMoreBtn">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="19" r="1.2" fill="currentColor"/></svg>
+        </button>
+      </div>
+
+      <div class="player-artwork-wrap">
+        <div class="player-artwork" id="playerArtwork">
+          <img id="playerArtImg" src="" alt="Album Art" />
+          <div class="artwork-placeholder" id="artworkPlaceholder">
+            <svg viewBox="0 0 24 24" fill="none" width="64" height="64"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="0.5" opacity="0.5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>
+          </div>
+        </div>
+        <div class="vinyl-disc" id="vinylDisc"></div>
+      </div>
+
+      <div class="player-info">
+        <div class="player-title-row">
+          <div>
+            <h2 class="player-title" id="playerTitle">Select a song</h2>
+            <p class="player-artist" id="playerArtist">--</p>
+          </div>
+          <button class="like-btn" id="playerLikeBtn" aria-label="Like">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="progress-section">
+        <div class="progress-bar-container" id="progressBarContainer">
+          <div class="progress-bar-bg">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-thumb" id="progressThumb"></div>
+          </div>
+        </div>
+        <div class="progress-times">
+          <span id="currentTime">0:00</span>
+          <span id="totalTime">0:00</span>
+        </div>
+      </div>
+
+      <!-- CONTROLS -->
+      <div class="player-controls">
+        <button class="ctrl-btn shuffle-btn" id="shuffleBtn" aria-label="Shuffle">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M16 3h5v5M4 20L21 3M16 21h5v-5M4 4l17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ctrl-btn prev-btn" id="prevBtn" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M19 20L9 12l10-8v16zM5 4v16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ctrl-btn play-pause-btn" id="playPauseBtn" aria-label="Play/Pause">
+          <svg viewBox="0 0 24 24" fill="none" id="playPauseIcon"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg>
+        </button>
+        <button class="ctrl-btn next-btn" id="nextBtn" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 4l10 8-10 8V4zM19 4v16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ctrl-btn repeat-btn" id="repeatBtn" aria-label="Repeat">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M17 2l4 4-4 4M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 01-4 4H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- VOLUME -->
+      <div class="volume-section">
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor" opacity="0.5"/></svg>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" />
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+
+      <!-- EXTRA ACTIONS -->
+      <div class="player-extras">
+        <button class="extra-btn" id="addToLibraryBtn">
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Library
+        </button>
+        <button class="extra-btn" id="openYtBtn">
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Open
+        </button>
+        <button class="extra-btn" id="shareBtn">
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="1.5"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="1.5"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="1.5"/></svg>
+          Share
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- AUDIO ELEMENT -->
+  <audio id="audioPlayer" preload="metadata"></audio>
+
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
