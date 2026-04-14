@@ -243,65 +243,37 @@
           </div>
         </div>
 
-        <!-- API MANAGEMENT -->
-        <div class="settings-section">
-          <h3 class="settings-label">API Management</h3>
-          <div class="settings-card">
-            <div class="api-source-toggle">
-              <button class="api-tab active" data-api="youtube">YouTube API</button>
-              <button class="api-tab" data-api="spotify">Spotify API</button>
-            </div>
+        <!-- Jamendo API -->
+<div class="api-panel" id="panel-jamendo">
+  <div class="settings-row col">
+    <label>Jamendo Client ID</label>
+    <div class="api-input-row">
+      <input type="password" class="settings-input" id="jamendoClientId" placeholder="Enter Client ID" autocomplete="off" />
+      <button class="toggle-visibility" data-target="jamendoClientId">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </button>
+    </div>
+    <span class="api-hint">
+      Get from <a href="https://developer.jamendo.com/v3.0" target="_blank">Jamendo Developer</a>
+    </span>
+  </div>
 
-            <!-- YouTube API -->
-            <div class="api-panel active" id="panel-youtube">
-              <div class="settings-row col">
-                <label>YouTube Data API v3 Key</label>
-                <div class="api-input-row">
-                  <input type="password" class="settings-input" id="ytApiKey" placeholder="AIza..." autocomplete="off" />
-                  <button class="toggle-visibility" data-target="ytApiKey">
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
-                  </button>
-                </div>
-                <span class="api-hint">Get from <a href="https://console.developers.google.com" target="_blank" rel="noopener">Google Cloud Console</a></span>
-              </div>
-              <div class="settings-row toggle-row">
-                <label>Enable YouTube API</label>
-                <label class="toggle-switch">
-                  <input type="checkbox" id="ytApiEnabled" />
-                  <span class="toggle-track"></span>
-                </label>
-              </div>
-              <button class="btn-primary" id="saveYtApiBtn">Save &amp; Activate</button>
-              <div class="api-status" id="ytApiStatus"></div>
-            </div>
+  <div class="settings-row toggle-row">
+    <label>Enable Jamendo API</label>
+    <label class="toggle-switch">
+      <input type="checkbox" id="jamendoApiEnabled" />
+      <span class="toggle-track"></span>
+    </label>
+  </div>
 
-            <!-- Spotify API -->
-            <div class="api-panel" id="panel-spotify">
-              <div class="settings-row col">
-                <label>Spotify Client ID</label>
-                <input type="text" class="settings-input" id="spotClientId" placeholder="Client ID" autocomplete="off" />
-              </div>
-              <div class="settings-row col">
-                <label>Spotify Client Secret</label>
-                <div class="api-input-row">
-                  <input type="password" class="settings-input" id="spotClientSecret" placeholder="Client Secret" autocomplete="off" />
-                  <button class="toggle-visibility" data-target="spotClientSecret">
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
-                  </button>
-                </div>
-                <span class="api-hint">Get from <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a></span>
-              </div>
-              <div class="settings-row toggle-row">
-                <label>Enable Spotify API</label>
-                <label class="toggle-switch">
-                  <input type="checkbox" id="spotApiEnabled" />
-                  <span class="toggle-track"></span>
-                </label>
-              </div>
-              <button class="btn-primary" id="saveSpotApiBtn">Save &amp; Activate</button>
-              <div class="api-status" id="spotApiStatus"></div>
-            </div>
-          </div>
+  <button class="btn-primary" id="saveJamendoApiBtn">
+    Save & Activate
+  </button>
+
+  <div class="api-status" id="jamendoApiStatus"></div>
         </div>
 
         <!-- PREFERENCES -->
